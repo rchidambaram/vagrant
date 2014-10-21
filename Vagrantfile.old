@@ -1,0 +1,55 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do | config|
+
+  config.vm.define "mlh" do |mlh_config|
+    mlh_config.vm.box = "chef/centos-6.5"
+	mlh_config.vm.synced_folder "../source_mlh/www", "/var/www/html/public_html"
+	mlh_config.vm.synced_folder "../source_mlh/www/source_cron", "/home/mylandho/public_html"
+	mlh_config.vm.network "private_network", ip: "192.168.33.10"
+    mlh_config.vm.network "public_network"
+    mlh_config.vm.provision :shell, :path => "bootstrap.sh"
+    mlh_config.vm.provision "puppet" do |puppet|
+      puppet.module_path = "puppet/modules"
+      puppet.manifests_path = "puppet/manifests"
+      puppet.manifest_file = "mlh.pp"
+    end
+    mlh_config.vm.provider :virtualbox do |vb|
+      vb.customize ["modifyvm", :id, "--memory", "512", "--name", "MLH"]
+    end
+  end
+ 
+  config.vm.define "rcp" do |rcp_config|
+    rcp_config.vm.box = "chef/centos-6.5"
+	rcp_config.vm.synced_folder "../source_rcp/www", "/var/www/html/public_html"
+	rcp_config.vm.synced_folder "../source_rcp/www/source_cron", "/home/mylandho/public_html"		
+    rcp_config.vm.network "private_network", ip: "192.168.33.11"
+    rcp_config.vm.provision :shell, :path => "bootstrap.sh"
+    rcp_config.vm.provision "puppet" do |puppet|
+      puppet.module_path = "puppet/modules"
+      puppet.manifests_path = "puppet/manifests"
+      puppet.manifest_file = "rcp.pp"
+    end
+    rcp_config.vm.provider :virtualbox do |vb|
+      vb.customize ["modifyvm", :id, "--memory", "512", "--name", "RCP"]
+    end
+  end
+
+  config.vm.define "adc" do |adc_config|
+    adc_config.vm.box = "chef/centos-6.5"
+	adc_config.vm.synced_folder "../source_adc/www", "/var/www/html/public_html"
+	adc_config.vm.synced_folder "../source_adc/www/source_cron", "/home/mylandho/public_html"		
+    adc_config.vm.network "private_network", ip: "192.168.33.12"
+    adc_config.vm.provision :shell, :path => "bootstrap.sh"
+    adc_config.vm.provision "puppet" do |puppet|
+      puppet.module_path = "puppet/modules"
+      puppet.manifests_path = "puppet/manifests"
+      puppet.manifest_file = "adc.pp"
+    end
+    adc_config.vm.provider :virtualbox do |vb|
+      vb.customize ["modifyvm", :id, "--memory", "512", "--name", "ADC"]
+    end
+  end
+ 
+end

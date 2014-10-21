@@ -1,0 +1,18 @@
+127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
+::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
+
+
+192.168.33.10	dev.mylandhome.com
+192.168.33.10	qa.mylandhome.com
+192.168.33.10	dos.qa.mylandhome.com
+192.168.33.10	mylandho.qa.prod.auction.local
+192.168.33.10	mylandho.dev.prod.auction.local
+192.168.33.10	mylandho.dos.qa.prod.auction.local
+
+192.168.33.11	dev.redcconnectionpro.com
+192.168.33.11	qa.redcconnectionpro.com
+192.168.33.11	dos.qa.redcconnectionpro.com
+
+192.168.33.12	dev.auction.com
+192.168.33.12	qa.auction.com
+192.168.33.12	dos.qa.auction.com

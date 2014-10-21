@@ -1,0 +1,5 @@
+#[Auction]
+#name=Auction
+#enabled=1
+#baseurl=http://satellite.prod.auction.local/repo
+#gpgcheck=0
